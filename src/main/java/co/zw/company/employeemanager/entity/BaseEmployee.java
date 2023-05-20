@@ -1,7 +1,8 @@
 package co.zw.company.employeemanager.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Data
