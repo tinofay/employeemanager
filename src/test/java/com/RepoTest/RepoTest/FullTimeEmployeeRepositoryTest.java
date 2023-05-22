@@ -1,7 +1,7 @@
 package com.RepoTest.RepoTest;
 
 //import org.junit.jupiter.api.Assertions;
-import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -33,13 +33,7 @@ public class FullTimeEmployeeRepositoryTest {
         fullTimeEmployee.setSalary(4500.00);
         fullTimeEmployeeRepository.save(fullTimeEmployee);
         Assertions.assertThat(fullTimeEmployee.getId()).isGreaterThan(0);
-       /* FullTimeEmployee fullTimeEmployee= FullTimeEmployee.builder()
-                .("munya")
-                .lastname("gapu")
-                .email("munya@gmail.com")
-                .build();
-        fullTimeEmployeeRepository.save(fullTimeEmployee);
-         Assertions.assertThat(fullTimeEmployee.getId()).isGreaterThan(0);*/
+
 
     }
     @Test
@@ -94,12 +88,7 @@ public class FullTimeEmployeeRepositoryTest {
     @Order(5)
     @Rollback(value = false)
     public void deleteEmployees(){
-        /*FullTimeEmployee fullTimeEmployeeSave= FullTimeEmployee.builder()
-                .firstname("munya")
-                .lastname("gapu")
-                .email("munyagapu@gmail.com")
-                .build();
-        fullTimeEmployeeRepository.save(fullTimeEmployeeSave);*/
+
         FullTimeEmployee fullTimeEmployee=fullTimeEmployeeRepository.findById(1L).get();
         fullTimeEmployeeRepository.delete(fullTimeEmployee);
         FullTimeEmployee ft=null;
