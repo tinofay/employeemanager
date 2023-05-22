@@ -18,6 +18,6 @@ public class Project {
     private String description;
     @ManyToOne
     private Department department;
-    @ManyToMany(mappedBy = "projects")
-    private List<BaseEmployee> employees;
+//    @ManyToMany(mappedBy = "projects")
+//    private List<BaseEmployee> employees;
 }
