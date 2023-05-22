@@ -15,4 +15,13 @@ public abstract class BaseEmployee {
     private Long id;
     private String name;
     private String email;
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "department_name")
+    private Department department;
+
+    public BaseEmployee(Long id, String name, String email) {
+    }
 }
