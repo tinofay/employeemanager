@@ -1,15 +1,13 @@
 package co.zw.company.employeemanager.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity
-@Setter
-@Getter
+@Data
 public class Contractor extends BaseEmployee {
-    private LocalDate start, end;
+    private LocalDate contractStartDate, contractEndDate;
 
     }

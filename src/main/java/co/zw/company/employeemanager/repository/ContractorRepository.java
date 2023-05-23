@@ -8,5 +8,5 @@ import java.time.LocalDate;
 
 @Repository
 public interface ContractorRepository extends JpaRepository<Contractor, Long> {
-    Contractor findByStart(LocalDate start);
+    Contractor findContractorByContractStartDate(LocalDate start);
 }
