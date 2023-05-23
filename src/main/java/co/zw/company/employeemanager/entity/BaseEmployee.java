@@ -16,5 +16,5 @@ public abstract class BaseEmployee {
     private String name;
     private String email;
     @ManyToOne
-    private Department department;
+    public Department department;
 }
