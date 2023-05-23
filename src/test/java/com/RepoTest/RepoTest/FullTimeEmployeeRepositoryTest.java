@@ -27,7 +27,7 @@ public class FullTimeEmployeeRepositoryTest {
     public void saveTest(){
         FullTimeEmployee fullTimeEmployee=new FullTimeEmployee();
         fullTimeEmployee.setEmail("munyagapu@gmail.com");
-        fullTimeEmployee.setDepartment("HR");
+        fullTimeEmployee.department.setName("HR");
         fullTimeEmployee.setBenefits("fuel allowance");
         fullTimeEmployee.setName("munyaradzi gapu");
         fullTimeEmployee.setSalary(4500.00);
@@ -41,7 +41,7 @@ public class FullTimeEmployeeRepositoryTest {
     public void getEmployee(){
         FullTimeEmployee fullTimeEmployee=new FullTimeEmployee();
         fullTimeEmployee.setEmail("munyagapu@gmail.com");
-        fullTimeEmployee.setDepartment("HR");
+        fullTimeEmployee.department.setName("HR");
         fullTimeEmployee.setBenefits("fuel allowance");
         fullTimeEmployee.setName("munyaradzi gapu");
         fullTimeEmployee.setSalary(4500.00);
@@ -57,7 +57,7 @@ public class FullTimeEmployeeRepositoryTest {
     public void getListEmployees(){
         FullTimeEmployee fullTimeEmployee=new FullTimeEmployee();
         fullTimeEmployee.setEmail("munyagapu@gmail.com");
-        fullTimeEmployee.setDepartment("HR");
+        fullTimeEmployee.department.setName("HR");
         fullTimeEmployee.setBenefits("fuel allowance");
         fullTimeEmployee.setName("munyaradzi gapu");
         fullTimeEmployee.setSalary(4500.00);
@@ -73,7 +73,7 @@ public class FullTimeEmployeeRepositoryTest {
     public void updateEmployees(){
         FullTimeEmployee fullTimeEmployeeSave=new FullTimeEmployee();
         fullTimeEmployeeSave.setEmail("munyagapu@gmail.com");
-        fullTimeEmployeeSave.setDepartment("HR");
+        fullTimeEmployeeSave.department.setName("HR");
         fullTimeEmployeeSave.setBenefits("fuel allowance");
         fullTimeEmployeeSave.setName("munyaradzi gapu");
         fullTimeEmployeeSave.setSalary(4500.00);

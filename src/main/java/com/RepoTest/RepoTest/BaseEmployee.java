@@ -1,5 +1,6 @@
 package com.RepoTest.RepoTest;
 
+import co.zw.company.employeemanager.entity.Department;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public abstract class BaseEmployee {
     public Long id;
     public String name;
     public String email;
-    public String department;
+    @ManyToOne
+    public Department department;
 
 }
