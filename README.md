@@ -9,7 +9,7 @@ A demo employee management system executing CRUD operations to manage employees 
 * Requirements: JDK 11, Maven 3.6, MySQL Server for setting up database.
 
 #### Running the program
-To run the program: open terminal and navigate to the project directory. Execute the following commands:
+To run the program: open terminal and navigate to the project directory. Execute the following maven commands:
 1. mvn clean
 2. mvn install
 3. mvn spring-boot:run
