@@ -93,12 +93,12 @@ public class FullTimeEmployeeRepositoryTest {
 
         FullTimeEmployee fullTimeEmployee=fullTimeEmployeeRepository.findById(1L).get();
         fullTimeEmployeeRepository.delete(fullTimeEmployee);
-        FullTimeEmployee checkfulltime=null;
+        FullTimeEmployee checkfulltimevariable=null;
         Optional<FullTimeEmployee> optionalFullTimeEmployee=fullTimeEmployeeRepository.findByEmail("gapu@gmail.com");
         if(optionalFullTimeEmployee.isPresent()){
-            checkfulltime=optionalFullTimeEmployee.get();
+            checkfulltimevariable=optionalFullTimeEmployee.get();
         }
-        Assertions.assertThat(checkfulltime).isNull();
+        Assertions.assertThat(checkfulltimevariable).isNull();
 
 
     }
