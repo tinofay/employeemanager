@@ -6,7 +6,7 @@ A demo employee management system executing CRUD operations to manage employees 
 ### Getting Started
 
 #### Setting Up Project Locally
-* Requirements: JDK 11, Maven 3.6, MySQL Server for setting up database.
+* Requirements: JDK 11, Maven 2.7.11, MySQL Server for setting up database.
 
 #### Running the program
 To run the program: open terminal and navigate to the project directory. Execute the following maven commands:
