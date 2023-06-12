@@ -1,11 +1,15 @@
 package co.zw.company.employeemanager;
 
 import co.zw.company.employeemanager.entity.Department;
+import co.zw.company.employeemanager.entity.FullTimeEmployee;
 import co.zw.company.employeemanager.entity.Project;
 import co.zw.company.employeemanager.repository.DepartmentRepository;
 import co.zw.company.employeemanager.repository.ProjectRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,17 +21,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ProjectTests {
 
     @Autowired
     private ProjectRepository projectRepository;
-    @Autowired
-    private DepartmentRepository departmentRepository;
-    private Department department;
+
 
     @Test
+    @Order(1)
     @Rollback(value = false)
     public void saveProject() {
 
@@ -40,18 +42,21 @@ public class ProjectTests {
     }
 
     @Test
-    public void getProjectTest() {
+    @Order(2)
+    public void getProject() {
 
         Project project =  new Project ();
         project.setName("Chaka Chaya");
         project.setDescription("description");
         projectRepository.save(project);
         projectRepository.findById(1L).get();
-        Assertions.assertThat(project.getId()).isEqualTo(1L);
+        Project findProject = projectRepository.findById(1L).get();
+        Assertions.assertThat(findProject.getId()).isEqualTo(1L);
     }
 
     @Test
-    public void getListOfProjectTest() {
+    @Order(3)
+    public void getListOfProjects() {
 
         Project project =  new Project ();
         project.setName("Chaka Chaya");
@@ -62,15 +67,16 @@ public class ProjectTests {
     }
 
     @Test
+    @Order(4)
     @Rollback(value = false)
-    public void updateProjectTest(){
+    public void updateProject(){
         Project project =  new Project ();
         project.setName("Chaka Chaya");
         project.setDescription("description");
         projectRepository.save(project);
         Project projectUpdated =  projectRepository.findById(1L).get();
         projectUpdated.setName("Vaya Technologies");
-        projectRepository.save(project);
-        Assertions.assertThat(project.getName()).isEqualTo("Vaya Technologies");
+        Project projectTwo = projectRepository.save(projectUpdated);
+        Assertions.assertThat(projectTwo.getName()).isEqualTo("Vaya Technologies");
     }
 }
