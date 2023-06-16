@@ -38,13 +38,11 @@ public class ProjectTests {
         project.setDescription("description");
         Project savedProject = projectRepository.save(project);
         assertNotNull(savedProject);
-
     }
 
     @Test
     @Order(2)
     public void getProject() {
-
         Project project =  new Project ();
         project.setName("Chaka Chaya");
         project.setDescription("description");
@@ -57,9 +55,8 @@ public class ProjectTests {
     @Test
     @Order(3)
     public void getListOfProjects() {
-
         Project project =  new Project ();
-        project.setName("Chaka Chaya");
+        project.setName("Chaka Chayaa");
         project.setDescription("description");
         projectRepository.save(project);
         List<Project> projectS = projectRepository.findAll();
