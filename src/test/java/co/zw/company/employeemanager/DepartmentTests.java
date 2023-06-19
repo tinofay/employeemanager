@@ -8,11 +8,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.assertj.core.api.Assertions;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.OptimisticLockException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -33,6 +36,35 @@ public class DepartmentTests {
         Department found = departmentRepository.findById(department.getId()).orElse(null);
         assert found != null;
         Assertions.assertThat(found.getName()).isEqualTo(department.getName());
+    }
+
+    @Transactional
+    @Test
+    public void testUpdateDepartmentWithVersion() {
+        //create department
+        Department department = new Department();
+        department.setName("Software Engineering");
+        department = departmentRepository.save(department);
+
+        // Simulate a concurrent update to the same entity
+        Department concurrentDepartment = new Department();
+        concurrentDepartment.setId(department.getId());
+        concurrentDepartment.setName("Software Engineering Department");
+        concurrentDepartment.setVersion(department.getVersion());
+        departmentRepository.save(concurrentDepartment);
+
+        // Call the service method to update the department entity
+        department.setName("Artificial Intelligence");
+
+        // Assert that the service method throws an OptimisticLockException
+        try {
+            departmentRepository.save(department);
+//            departmentRepository.save(concurrentDepartment);
+//            assertEquals("Software Engineering Department", concurrentDepartment.getName());
+            fail("Expected OptimisticLockException to be thrown");
+        } catch (Exception e) {
+            assertTrue(e instanceof OptimisticLockException);
+        }
     }
 
     @Test

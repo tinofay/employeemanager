@@ -18,4 +18,6 @@ public class Department {
     private String description;
     @OneToMany(mappedBy = "department")
     private List<Project> projects;
+    @Version
+    private Long version;
 }
