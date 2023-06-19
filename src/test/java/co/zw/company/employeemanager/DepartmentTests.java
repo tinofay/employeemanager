@@ -57,14 +57,11 @@ public class DepartmentTests {
         department.setName("Artificial Intelligence");
 
         // Assert that the service method throws an OptimisticLockException
-        try {
-            departmentRepository.save(department);
-//            departmentRepository.save(concurrentDepartment);
-//            assertEquals("Software Engineering Department", concurrentDepartment.getName());
-            fail("Expected OptimisticLockException to be thrown");
-        } catch (Exception e) {
-            assertTrue(e instanceof OptimisticLockException);
-        }
+        Department finalDepartment = department;
+        assertThrows(OptimisticLockException.class, () -> {
+            departmentRepository.save(finalDepartment);
+        });
+        
     }
 
     @Test
