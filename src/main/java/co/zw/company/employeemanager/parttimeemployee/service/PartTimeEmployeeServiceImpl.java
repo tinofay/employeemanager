@@ -4,6 +4,8 @@ import co.zw.company.employeemanager.parttimeemployee.model.PartTimeEmployee;
 import co.zw.company.employeemanager.parttimeemployee.repository.PartTimeEmployeeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PartTimeEmployeeServiceImpl implements PartTimeEmployeeService {
 
@@ -16,5 +18,11 @@ public class PartTimeEmployeeServiceImpl implements PartTimeEmployeeService {
     public PartTimeEmployee savePartTimeEmployee(PartTimeEmployee partTimeEmployee) {
         final var partTimeEmployee1 = partTimeEmployeeRepository.save(partTimeEmployee);
         return partTimeEmployee1;
+    }
+
+    @Override
+    public Optional<PartTimeEmployee> findPartTimeEmployeeById(Long id) {
+        final var partTimeEmployee = partTimeEmployeeRepository.findPartTimeEmployeeById(id);
+        return Optional.of(partTimeEmployee).orElse(null);
     }
 }
