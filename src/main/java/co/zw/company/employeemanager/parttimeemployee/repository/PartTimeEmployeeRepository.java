@@ -1,6 +1,6 @@
-package co.zw.company.employeemanager.repository;
+package co.zw.company.employeemanager.parttimeemployee.repository;
 
-import co.zw.company.employeemanager.entity.PartTimeEmployee;
+import co.zw.company.employeemanager.parttimeemployee.model.PartTimeEmployee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,11 @@ public interface PartTimeEmployeeRepository extends JpaRepository<PartTimeEmploy
 
     Optional<PartTimeEmployee> findPartTimeEmployeeById(Long id);
 
+//    @Lock(LockModeType.OPTIMISTIC)
     PartTimeEmployee save(PartTimeEmployee partTimeEmployee);
 
-    PartTimeEmployee deletePartTimeEmployeeById(Long id);
+    void deleteById(Long id);
+
+
+    //void updatePartTimeEmployeeById(Long id);
 }
