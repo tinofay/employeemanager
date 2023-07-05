@@ -1,53 +1,63 @@
 package co.zw.company.employeemanager;
 
-import co.zw.company.employeemanager.entity.Department;
 import co.zw.company.employeemanager.entity.Project;
-import co.zw.company.employeemanager.repository.DepartmentRepository;
 import co.zw.company.employeemanager.repository.ProjectRepository;
+
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit4.SpringRunner;
+
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
+
+@RunWith(SpringRunner.class)
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-
 public class ProjectTests {
 
     @Autowired
     private ProjectRepository projectRepository;
     @Autowired
-    private DepartmentRepository departmentRepository;
-    private Department department;
+    private TestEntityManager testEntityManager;
+    private Project project;
+
 
     @Test
-    @Rollback(value = false)
-    public void saveProject() {
-
-        Project project =  new Project ();
+    public void givenProject_whenSave_ShouldSaveProject() {
+       Project project =  new Project();
         project.setName("Chaka Chaya");
         project.setDescription("description");
-        Project savedProject = projectRepository.save(project);
+
+        testEntityManager.persist(project);
+        testEntityManager.flush();
+
+        var savedProject = projectRepository.save(project);
+        projectRepository.getById(savedProject.getId());
+
         assertNotNull(savedProject);
 
     }
 
     @Test
-    public void getProjectTest() {
+    public void givenId_whenGetProjectById_shouldReturnProjectTest() throws Exception{
 
-        Project project =  new Project ();
+        Project project =  new Project();
         project.setName("Chaka Chaya");
         project.setDescription("description");
-        projectRepository.save(project);
-        projectRepository.findById(1L).get();
-        Assertions.assertThat(project.getId()).isEqualTo(1L);
+        testEntityManager.persist(project);
+        testEntityManager.flush();
+
+        projectRepository.findById(project.getId());
+
+        Assertions.assertThat(project.getId()).isEqualTo(1L).isNotNull();
+
     }
 
     @Test
@@ -56,18 +66,19 @@ public class ProjectTests {
         Project project =  new Project ();
         project.setName("Chaka Chaya");
         project.setDescription("description");
-        projectRepository.save(project);
+        testEntityManager.persist(project);
+        testEntityManager.flush();
         List<Project> projectS = projectRepository.findAll();
         Assertions.assertThat(projectS.size()).isGreaterThan(0);
     }
 
     @Test
-    @Rollback(value = false)
     public void updateProjectTest(){
         Project project =  new Project ();
         project.setName("Chaka Chaya");
         project.setDescription("description");
-        projectRepository.save(project);
+        testEntityManager.persist(project);
+        testEntityManager.flush();
         Project projectUpdated =  projectRepository.findById(1L).get();
         projectUpdated.setName("Vaya Technologies");
         projectRepository.save(project);

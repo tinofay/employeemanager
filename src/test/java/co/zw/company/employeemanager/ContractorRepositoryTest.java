@@ -3,18 +3,19 @@ package co.zw.company.employeemanager;
 import co.zw.company.employeemanager.entity.Contractor;
 import co.zw.company.employeemanager.repository.ContractorRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 
 import java.time.LocalDate;
 
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class ContractorRepositoryTest {
 
@@ -25,7 +26,7 @@ public class ContractorRepositoryTest {
 
     private Contractor contractor;
 
-    @Before
+    @BeforeEach
     public void setUp(){
         contractor = new Contractor();
         contractor.setName("Tino Zee");

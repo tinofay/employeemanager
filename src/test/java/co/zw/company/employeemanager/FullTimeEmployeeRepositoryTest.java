@@ -9,30 +9,36 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@RunWith(SpringRunner.class)
 public class FullTimeEmployeeRepositoryTest {
     @Autowired
-    FullTimeEmployeeRepository fullTimeEmployeeRepository;
+    private FullTimeEmployeeRepository fullTimeEmployeeRepository;
+    @Autowired
+    private TestEntityManager  testEntityManager;
 
-    //testing the save method
+
     @Test
-    @Order(1)
-    @Rollback(value = false)
     public void saveTest(){
-        FullTimeEmployee fullTimeEmployee=new FullTimeEmployee();
+        FullTimeEmployee fullTimeEmployee = new FullTimeEmployee();
         fullTimeEmployee.setEmail("munyagapu@gmail.com");
-
         fullTimeEmployee.setBenefits("fuel allowance");
         fullTimeEmployee.setName("munyaradzi gapu");
         fullTimeEmployee.setSalary(4500.00);
+
+        testEntityManager.persist(fullTimeEmployee);
+        testEntityManager.flush();
+
         fullTimeEmployeeRepository.save(fullTimeEmployee);
         Assertions.assertThat(fullTimeEmployee.getId()).isGreaterThan(0);
 

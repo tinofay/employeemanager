@@ -1,4 +1,5 @@
-package co.zw.company.employeemanager.entity;
+package co.zw.company.employeemanager.department.model;
+import co.zw.company.employeemanager.entity.Project;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

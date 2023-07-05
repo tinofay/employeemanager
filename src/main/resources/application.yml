@@ -1,0 +1,30 @@
+server:
+        port: 8082
+
+spring:
+    mvc:
+        pathmatch:
+                  matching-strategy: ant_path_matcher
+    datasource:
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         url: jdbc:mysql://localhost:3306/management
+         username: root
+         password: d3vp@ss
+
+    jpa:
+      hibernate:
+        ddl-auto: update
+        show-sql: true
+        properties:
+                  hibernate:
+                      dialect: org.hibernate.dialect.MySQL5Dialect
+
+  #flyway
+    spring:
+      flyway:
+        baselineOnMigrate: true
+        validateOnMigrate: false
+        repair-on-failure: true
+        locations: classpath:/db/migration
+        table: schema_history
+
