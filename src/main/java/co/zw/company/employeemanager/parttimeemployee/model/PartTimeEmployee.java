@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Data
 @Table(name="part_time_employee")
 public class PartTimeEmployee extends BaseEmployee {
+
     @Column(name = "hourly_rate")
     private double hourlyRate;
     @Column(name="contracted_hours")

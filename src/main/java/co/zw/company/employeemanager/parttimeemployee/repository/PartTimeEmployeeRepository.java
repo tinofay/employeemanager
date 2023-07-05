@@ -11,14 +11,8 @@ import java.util.Optional;
 public interface PartTimeEmployeeRepository extends JpaRepository<PartTimeEmployee,Long> {
 
     List<PartTimeEmployee> findAll();
-
     Optional<PartTimeEmployee> findPartTimeEmployeeById(Long id);
-
-//    @Lock(LockModeType.OPTIMISTIC)
     PartTimeEmployee save(PartTimeEmployee partTimeEmployee);
-
     void deleteById(Long id);
 
-
-    //void updatePartTimeEmployeeById(Long id);
 }

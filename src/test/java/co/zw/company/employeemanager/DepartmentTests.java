@@ -1,6 +1,6 @@
 package co.zw.company.employeemanager;
-import co.zw.company.employeemanager.entity.Department;
-import co.zw.company.employeemanager.repository.DepartmentRepository;
+import co.zw.company.employeemanager.department.model.Department;
+import co.zw.company.employeemanager.department.repository.DepartmentRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
