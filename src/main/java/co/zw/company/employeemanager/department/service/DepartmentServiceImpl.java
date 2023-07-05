@@ -4,9 +4,9 @@ import co.zw.company.employeemanager.department.exception.DepartmentException;
 import co.zw.company.employeemanager.department.model.Department;
 import co.zw.company.employeemanager.department.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -28,13 +28,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getDepartmentById(Long id) {
-        Optional<Department> optionalDepartment = departmentRepository.findById(id);
-
-        return optionalDepartment.orElseGet(() -> {
-            Department notFoundDepartment = new Department();
-            notFoundDepartment.setName("Department Not Found");
-            return notFoundDepartment;
-        });
+        return departmentRepository.findById(id).orElseThrow(() -> new DepartmentException("Department not found"));
     }
 
     @Override
@@ -49,4 +43,5 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void deleteDepartment(Long id) {
         departmentRepository.deleteById(id);
     }
+
 }
