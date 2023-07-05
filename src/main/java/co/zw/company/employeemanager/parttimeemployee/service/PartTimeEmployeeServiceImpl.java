@@ -5,6 +5,8 @@ import co.zw.company.employeemanager.parttimeemployee.repository.PartTimeEmploye
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class PartTimeEmployeeServiceImpl implements PartTimeEmployeeService {
@@ -17,5 +19,11 @@ public class PartTimeEmployeeServiceImpl implements PartTimeEmployeeService {
     public PartTimeEmployee savePartTimeEmployee(PartTimeEmployee partTimeEmployee) {
         final var partTimeEmployee1 = partTimeEmployeeRepository.save(partTimeEmployee);
         return partTimeEmployee1;
+    }
+
+    @Override
+    public Optional<PartTimeEmployee> findPartTimeEmployeeById(Long id) {
+        final var partTimeEmployee = partTimeEmployeeRepository.findPartTimeEmployeeById(id);
+        return Optional.of(partTimeEmployee).orElse(null);
     }
 }
